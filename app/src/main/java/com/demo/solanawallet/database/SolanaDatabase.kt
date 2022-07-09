@@ -5,9 +5,10 @@ import androidx.room.Database
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
 import com.demo.solanawallet.dao.KeyPairDao
+import com.demo.solanawallet.entity.KeyPairEntity
 
 @Database(
-    entities = [KeyPairDao::class],
+    entities = [KeyPairEntity::class],
     version = 1
 )
 abstract class SolanaDatabase: RoomDatabase() {

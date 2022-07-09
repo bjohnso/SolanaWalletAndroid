@@ -2,7 +2,7 @@ package com.demo.solanawallet.usecase
 
 import java.nio.charset.StandardCharsets
 
-object Base58EncodeUseCase {
+object Base58Encoder {
     operator fun invoke(bytes: ByteArray): String {
         val maxEncodedSize = (((bytes.size * 352) + 255) / 256)
         val encoded = ByteArray(maxEncodedSize)
