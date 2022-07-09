@@ -18,7 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import com.demo.solanawallet.extensions.ContextExtensions.activity
 import com.demo.solanawallet.ui.theme.SolanaWalletTheme
 import com.demo.solanawallet.viewmodel.SolanaViewModel
@@ -90,6 +89,5 @@ fun MainScreen(context: Context) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    SolanaWalletTheme {
-    }
+    SolanaWalletTheme {}
 }

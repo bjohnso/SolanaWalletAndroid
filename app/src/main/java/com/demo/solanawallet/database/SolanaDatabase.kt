@@ -6,6 +6,9 @@ import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
 import com.demo.solanawallet.dao.KeyPairDao
 import com.demo.solanawallet.entity.KeyPairEntity
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SQLiteDatabaseHook
+import net.sqlcipher.database.SupportFactory
 
 @Database(
     entities = [KeyPairEntity::class],
@@ -24,9 +27,18 @@ abstract class SolanaDatabase: RoomDatabase() {
             }
         }
 
-        private fun buildDatabase(context: Context) =
-            databaseBuilder(context, SolanaDatabase::class.java, "solana.db")
+        private fun buildDatabase(context: Context): SolanaDatabase {
+            val passphrase: ByteArray = SQLiteDatabase.getBytes("password".toCharArray())
+            val factory = SupportFactory(passphrase, object: SQLiteDatabaseHook {
+                override fun preKey(database: SQLiteDatabase?) {}
+
+                override fun postKey(database: SQLiteDatabase?) {}
+            }, false)
+
+            return databaseBuilder(context, SolanaDatabase::class.java, "solana.db")
+                .openHelperFactory(factory)
                 .fallbackToDestructiveMigration()
                 .build()
+        }
     }
 }

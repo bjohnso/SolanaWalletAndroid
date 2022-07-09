@@ -67,6 +67,7 @@ dependencies {
     // Crypto
     implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
     implementation 'androidx.security:security-crypto:1.1.0-alpha03'
+    implementation "net.zetetic:android-database-sqlcipher:4.5.0"
 
     /* Room */
     implementation "androidx.room:room-runtime:2.4.2"
