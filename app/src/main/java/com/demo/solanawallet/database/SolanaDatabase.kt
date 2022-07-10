@@ -5,17 +5,20 @@ import androidx.room.Database
 import androidx.room.Room.databaseBuilder
 import androidx.room.RoomDatabase
 import com.demo.solanawallet.dao.KeyPairDao
+import com.demo.solanawallet.dao.SeedDao
 import com.demo.solanawallet.entity.KeyPairEntity
+import com.demo.solanawallet.entity.SeedEntity
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SQLiteDatabaseHook
 import net.sqlcipher.database.SupportFactory
 
 @Database(
-    entities = [KeyPairEntity::class],
+    entities = [KeyPairEntity::class, SeedEntity::class],
     version = 1
 )
 abstract class SolanaDatabase: RoomDatabase() {
     abstract fun keyPairDao(): KeyPairDao
+    abstract fun seedDao(): SeedDao
 
     companion object {
         @Volatile private var instance: SolanaDatabase? = null

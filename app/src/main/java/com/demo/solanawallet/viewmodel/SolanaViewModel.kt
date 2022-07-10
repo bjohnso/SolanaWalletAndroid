@@ -8,6 +8,6 @@ import kotlinx.coroutines.withContext
 
 class SolanaViewModel: ViewModel() {
     suspend fun createWallet(context: Context) = withContext(Dispatchers.IO) {
-        SolanaRepository.getInstance(context).generateKeyPair()
+        SolanaRepository.getInstance(context).generateKeyPair(context)
     }
 }

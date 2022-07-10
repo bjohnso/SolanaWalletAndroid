@@ -26,40 +26,40 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             SolanaWalletTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
-                ) { MainScreen(this) }
+                ) { walletScreen(context = this) }
             }
         }
     }
-}
 
-@Composable
-fun MainScreen(context: Context) {
-    val viewModel = (context.activity() as? ComponentActivity)
-        ?.let { ViewModelProvider(it )[SolanaViewModel::class.java] }
+    @Composable
+    fun walletScreen(context: Context) {
+        val viewModel = (context.activity() as? ComponentActivity)
+            ?.let { ViewModelProvider(it )[SolanaViewModel::class.java] }
 
-    val coroutineScope = rememberCoroutineScope()
+        val coroutineScope = rememberCoroutineScope()
 
-    Text(
-        text = "Solana Wallet",
-        textAlign = TextAlign.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 16.dp),
-        style = TextStyle(fontSize = 24.sp, color = MaterialTheme.colors.primary)
-    )
+        Text(
+            text = "Solana Wallet",
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp),
+            style = TextStyle(fontSize = 24.sp, color = MaterialTheme.colors.primary)
+        )
 
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(),
-        verticalArrangement = Arrangement.Center
-    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            verticalArrangement = Arrangement.Center
+        ) {
 //        Text(
 //            text = publicKey ?: "",
 //            textAlign = TextAlign.Center,
@@ -68,26 +68,25 @@ fun MainScreen(context: Context) {
 //                .padding(top = 16.dp, bottom = 16.dp),
 //            style = TextStyle(fontSize = 24.sp, color = MaterialTheme.colors.primary)
 //        )
-
-        Button(
-            onClick = {
-                coroutineScope.launch {
-                    viewModel?.createWallet(context = context)
-                }
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 32.dp, end = 32.dp)
-                .aspectRatio(5f)
-        ) {
-            Text(text = "Generate Keypair")
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        viewModel?.createWallet(context = context)
+                    }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 32.dp, end = 32.dp)
+                    .aspectRatio(5f)
+            ) {
+                Text(text = "Create Wallet")
+            }
         }
     }
-}
 
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SolanaWalletTheme {}
+    @Preview(showBackground = true)
+    @Composable
+    fun DefaultPreview() {
+        SolanaWalletTheme {}
+    }
 }
